@@ -7,12 +7,14 @@ import {
     TableHead,
     TableRow,
     Button,
-    IconButton,
 } from '@material-ui/core';
+import { upDateItem,deleteItem } from '../../Redux/reducer';
 import { makeStyles } from '@material-ui/core/styles';
 import DeleteIcon from '@material-ui/icons/Delete';
-import fetchRandomData from '../../network/index';
 import Paper from '@material-ui/core/Paper';
+import {bindActionCreators} from "redux";
+import { connect } from 'react-redux';
+
 const useStyles = makeStyles((theme) => ({
     button: {
         margin: theme.spacing(1),
@@ -20,22 +22,16 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const Users = () => {
+const Users = (props) => {
     const classes = useStyles();
     const [loading, setLoading] = useState(false);
     const [users, setUsers] = useState([]);
 
     function getEndPoint() {
-        fetchRandomData()
-            .then((data) => {
-                console.log('Success:', data);
-                setUsers(data.data);
+                setUsers(props.data);
                 setLoading(false);
-            })
-            .catch((error) => {
-                console.error('Error:', error);
-            });
-    }
+            }
+
 
     useEffect(() => {
         setLoading(true);
@@ -43,6 +39,7 @@ const Users = () => {
     }, [setUsers]);
 
     function getColumns(user,index) {
+        console.log('user',user)
         return (
             <TableBody key={index} data-testid="tableBody">
                 <TableCell align="left">{user.name}</TableCell>
@@ -52,12 +49,12 @@ const Users = () => {
                 <TableCell align="left">{user.created_at}</TableCell>
                 <TableCell align="left">{user.updated_at}</TableCell>
                 <TableCell align="left">
-                    <Button variant="contained" size="small" color="primary" className={classes.margin}>
+                    <Button onClick={()=>{alert('Edit')}} variant="contained" size="small" color="primary" className={classes.margin}>
                         Edit
                     </Button>
                 </TableCell>
                     <TableCell align="left">
-                        <DeleteIcon className={classes.button} color="secondary" />
+                        <DeleteIcon onClick={()=>{alert('DELETE_ITEM')}} className={classes.button} color="secondary" />
                 </TableCell>
 
             </TableBody>
@@ -91,4 +88,19 @@ const Users = () => {
     );
 };
 
-export default Users;
+const mapStateToProps = state => {
+    return {
+        data: state.dataState.data,
+    };
+};
+
+const mapDispatchToProps = dispatch =>
+    bindActionCreators(
+        {
+            upDateItem,
+            deleteItem
+        },
+        dispatch,
+    );
+
+export default connect(mapStateToProps, mapDispatchToProps)(Users);
