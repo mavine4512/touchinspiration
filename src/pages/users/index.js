@@ -8,22 +8,16 @@ import {
     TableRow,
     Button,
 } from '@material-ui/core';
-import { upDateItem,deleteItem } from '../../Redux/reducer';
-import { makeStyles } from '@material-ui/core/styles';
-import DeleteIcon from '@material-ui/icons/Delete';
+import { upDateItem } from '../../Redux/reducer';
 import Paper from '@material-ui/core/Paper';
-import {bindActionCreators} from "redux";
+import { bindActionCreators } from "redux";
 import { connect } from 'react-redux';
-
-const useStyles = makeStyles((theme) => ({
-    button: {
-        margin: theme.spacing(1),
-        size:"small"
-    },
-}));
+import useStyles from './styles';
+import { useHistory } from 'react-router-dom';
 
 const Users = (props) => {
-    const classes = useStyles();
+
+    const { topHeaders,button } = useStyles();
     const [loading, setLoading] = useState(false);
     const [users, setUsers] = useState([]);
 
@@ -31,17 +25,21 @@ const Users = (props) => {
                 setUsers(props.data);
                 setLoading(false);
             }
-
+    const history = useHistory();
 
     useEffect(() => {
         setLoading(true);
         getEndPoint();
     }, [setUsers]);
 
+       function editUser(user){
+           history.push('/EditUser',user)
+       }
+
     function getColumns(user,index) {
-        console.log('user',user)
+
         return (
-            <TableBody key={index} data-testid="tableBody">
+            <TableBody key={ index } data-testid="tableBody" >
                 <TableCell align="left">{user.name}</TableCell>
                 <TableCell align="left">{user.occupation}</TableCell>
                 <TableCell align="left">{user.email}</TableCell>
@@ -49,12 +47,9 @@ const Users = (props) => {
                 <TableCell align="left">{user.created_at}</TableCell>
                 <TableCell align="left">{user.updated_at}</TableCell>
                 <TableCell align="left">
-                    <Button onClick={()=>{alert('Edit')}} variant="contained" size="small" color="primary" className={classes.margin}>
+                    <Button onClick={()=>{ editUser(user)}} variant="contained" size="small" color="primary">
                         Edit
                     </Button>
-                </TableCell>
-                    <TableCell align="left">
-                        <DeleteIcon onClick={()=>{alert('DELETE_ITEM')}} className={classes.button} color="secondary" />
                 </TableCell>
 
             </TableBody>
@@ -69,18 +64,18 @@ const Users = (props) => {
                     <Table aria-label="simple table">
                     <TableHead >
                         <TableRow>
-                            <TableCell>Name</TableCell>
-                            <TableCell align="left">Occupation</TableCell>
-                            <TableCell align="left">Email</TableCell>
-                            <TableCell align="left">Bio</TableCell>
-                            <TableCell align="left">Created_at</TableCell>
-                            <TableCell align="left">Updated_at</TableCell>
+                            <TableCell className={topHeaders}>Name</TableCell>
+                            <TableCell className={topHeaders} align="left">Occupation</TableCell>
+                            <TableCell className={topHeaders} align="left">Email</TableCell>
+                            <TableCell className={topHeaders} align="left">Bio</TableCell>
+                            <TableCell className={topHeaders} align="left">Created at</TableCell>
+                            <TableCell className={topHeaders} align="left">Updated at</TableCell>
                             <TableCell align="left"></TableCell>
                             <TableCell align="left"></TableCell>
                         </TableRow>
                     </TableHead>
 
-                    {users.map((user, index) => getColumns(user, index))}}
+                    {users.map((user, index) => getColumns(user, index))}
                 </Table>
                 </TableContainer>
             )}
@@ -98,7 +93,6 @@ const mapDispatchToProps = dispatch =>
     bindActionCreators(
         {
             upDateItem,
-            deleteItem
         },
         dispatch,
     );

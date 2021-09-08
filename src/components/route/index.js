@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 
 import Home from '../../pages/home'
 import Users from '../../pages/users';
+import EditUser from '../../pages/editUser'
 import useStyles from './styles';
 
 const index = [
@@ -17,7 +18,7 @@ const index = [
 ];
 
 function RouteApp() {
-    const { root, menu, nav, switchContainer } = useStyles();
+    const { root, menu, nav, switchContainer,link } = useStyles();
 
     return (
         <Router>
@@ -26,7 +27,7 @@ function RouteApp() {
                     <ul className={menu}>
                         {index.map((r) => (
                             <li key={r.menu}>
-                                <Link to={r.path}>{r.menu}</Link>
+                                <Link className={link} to={r.path}>{r.menu}</Link>
                             </li>
                         ))}
                     </ul>
@@ -34,8 +35,10 @@ function RouteApp() {
 
                 <div className={switchContainer}>
                     <Switch>
+                        <Route path="/EditUser" component={EditUser} />
                         <Route path="/users" component={Users} />
                         <Route path="/" component={Home} />
+
                     </Switch>
                 </div>
             </div>

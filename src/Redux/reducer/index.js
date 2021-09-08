@@ -13,6 +13,13 @@ export function upDateItem(data) {
     };
 }
 
+export function itemObject(item){
+    return{
+        type:'ITEM_OBJECT',
+        payload:item,
+    }
+}
+
 
 export function deleteItem(item) {
     return {
@@ -25,36 +32,30 @@ export function deleteItem(item) {
 //Reducers
 const initialState = {
     data: [],
+    itemObject:'',
 };
 
 function itemsReducer(state = initialState, action) {
 
     switch (action.type) {
-        case ADD_ITEM:
-            const i = state.data.filter((it) => it == action.payload);
-
-            if (i.length > 0) {
-                //ignore
-                console.log('filter', i);
-                return state;
-            }
-            state.data.push(action.payload);
-            console.log('state is', state);
-            return state;
-            // Endpoint: "https://ti-react-test.herokuapp.com/users/{id}"
         case DELETE_ITEM:
             const deleteNewArray = state.items.filter(
-                (i) => i.imdbID != action.payload.imdbID,1
+                (i) => i.imdbID != action.payload.imdbID,
             );
             return {...state, items: deleteNewArray};
-        default:
-            return state;
 
-            case SAVE_DATA:
+        case 'ITEM_OBJECT':
+            return {
+                ...state,itemObject: action.payload
+            }
+
+        case 'SAVE_DATA':
             state.data.push(action.payload);
             return state;
-    }
 
+        default:
+            return state;
+    }
 }
 
 export default combineReducers({dataState: itemsReducer});

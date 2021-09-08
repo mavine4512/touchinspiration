@@ -29,6 +29,12 @@ const useStyles = makeStyles(() =>
                 listStyle: 'none',
             },
         },
+        link:{
+            color:'black',
+            textDecoration:'none',
+            fontWeight:'bold',
+            fontSize:18,
+        }
     })
 );
 

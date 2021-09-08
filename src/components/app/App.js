@@ -3,23 +3,16 @@ import RouteApp from '../route';
 import { connect } from 'react-redux';
 import {bindActionCreators} from 'redux';
 import { upDateItem } from '../../Redux/reducer';
-import fetchRandomData from '../../network/index';
+import {fetchUSer} from '../../network/index';
 
 class App extends Component {
- constructor(props) {
-     super(props);
-     this.state = {
-         users:[],
-         loading:false
-     }
- }
 
     componentDidMount() {
         this.getEndPoint();
     }
 
     getEndPoint= () => {
-        fetchRandomData()
+        fetchUSer()
             .then((data) => {
                 let userData = data.data
                 {userData.map((user) =>{
