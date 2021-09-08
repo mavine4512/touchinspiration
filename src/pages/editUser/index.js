@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import {updateUser,network} from '../../network/'
+import styles from './styles.js'
 
 class EditUser extends Component{
     constructor(props){
@@ -87,27 +88,29 @@ class EditUser extends Component{
 
     render(){
         return (
-            <div>
+            <div style={styles.container} >
 
-                <h1>Edit User details</h1>
+                <h3 style={styles.editHeader}>Edit User Details</h3>
                 <form onSubmit={this.onSubmit.bind(this)}>
-                    <div className="input-field">
-                        <input type="text" name="name" ref="name" value={this.state.name} onChange={(name)=>this.handleNameChange(name)} />
-                        <label htmlFor="name">Name</label>
+                    <div style={styles.inputField} >
+                        <label style={styles.editLabel} htmlFor="name">Name</label>
+                        <input style={styles.textInput} type="text" name="name" ref="name" value={this.state.name} onChange={(name)=>this.handleNameChange(name)} />
                     </div>
-                    <div className="input-field">
-                        <input type="text" name="occupation" ref="occupation" value={this.state.occupation} onChange={(occupation)=>this.handleOccupationChange(occupation)} />
-                        <label htmlFor="occupation">Occupation</label>
+                    <div style={styles.inputField} >
+                        <label style={styles.editLabel} htmlFor="occupation">Occupation</label>
+                        <input style={styles.textInput} type="text" name="occupation" ref="occupation" value={this.state.occupation} onChange={(occupation)=>this.handleOccupationChange(occupation)} />
                     </div>
-                    <div className="input-field">
-                        <input type="text" name="email" ref="email" value={this.state.email} onChange={(email) => this.handleEmailChange(email)} />
-                        <label htmlFor="email">Email</label>
+                    <div style={styles.inputField} >
+                        <label style={styles.editLabel} htmlFor="email">Email</label>
+                        <input style={styles.textInput} type="text" name="email" ref="email" value={this.state.email} onChange={(email) => this.handleEmailChange(email)} />
                     </div>
-                    <div className="input-field">
-                        <input type="text" name="bio" ref="bio" value={this.state.bio} onChange={(bio)=>this.handleBioChange(bio)} />
-                        <label htmlFor="bio">Bio</label>
+                    <div style={styles.inputField} >
+                        <label  style={styles.editLabel} htmlFor="bio">Bio</label>
+                        <input style={styles.textInput} type="text" name="bio" ref="bio" value={this.state.bio} onChange={(bio)=>this.handleBioChange(bio)} />
                     </div>
-                    <input type="submit" value="Save" className="btn" />
+                    <div >
+                        <input style={styles.btn}  type="submit" value="Save"  />
+                    </div>
                 </form>
             </div>
         )

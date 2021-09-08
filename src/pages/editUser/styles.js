@@ -1,18 +1,41 @@
-import { createStyles, makeStyles } from '@material-ui/core';
+export default {
+    container:{
+        minWidth: '100%',
+        height: '100vh',
+      margin: '0vw',
+      padding: '5vw',
+      position:'relative'
 
-const useStyles = makeStyles((theme) =>
-    createStyles({
-        Back:{
-            backgroundColor:'blue',
-            height:40,
-            width:30,
-        },
-        topHeaders:{
-            fontWeight:'bold',
-            color:'black',
-            fontSize:18,
-        },
-    })
-);
+    },
+    editHeader:{
+        fontSize: '18px',
+        textAlign: 'center',
+        margin: '0 0 .5vh 0',
+    },
 
-export default useStyles;
+    inputField:{
+        marginBottom:'2%',
+    },
+    textInput:{
+        width:'70%',
+        height: '1.5rem',
+        borderWidth:1,
+        borderColor:'gray'
+    },
+    editLabel:{
+        display: 'block',
+        fontWeight:'bold',
+        fontSize: '14px',
+    },
+    btn:{
+        backgroundColor:'blue',
+        color: 'white',
+        padding: '5px 15px',
+        borderRadius: '5px',
+        outline: '0',
+       textTransform: 'uppercase',
+       margin: '10px 0px',
+       cursor: 'pointer',
+    }
+};
+
