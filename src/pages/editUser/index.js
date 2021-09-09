@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import axios from 'axios';
 import {network} from '../../network/'
 import styles from './styles.js'
 
