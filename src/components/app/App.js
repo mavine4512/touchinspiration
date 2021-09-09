@@ -4,8 +4,15 @@ import { connect } from 'react-redux';
 import {bindActionCreators} from 'redux';
 import { upDateItem } from '../../Redux/reducer';
 import {fetchUSer} from '../../network/index';
+import styles from "./styles";
 
 class App extends Component {
+    constructor() {
+        super();
+        this.state={
+            loading:true,
+        }
+    }
 
     componentDidMount() {
         this.getEndPoint();
@@ -14,10 +21,12 @@ class App extends Component {
     getEndPoint= () => {
         fetchUSer()
             .then((data) => {
+                this.setState({loading: true});
                 let userData = data.data
                 {userData.map((user) =>{
                     if(user){
                         this.props.upDateItem(user)
+                        this.setState({loading:false});
                         this.setState({data: user});
                     }else{
                         this.setState({data: []});
@@ -25,6 +34,7 @@ class App extends Component {
 
             })
             .catch((error) => {
+                this.setState({loading:false})
                 console.error('Error:', error);
             });
     }
@@ -32,7 +42,7 @@ class App extends Component {
  render(){
     return (
         <div data-testid="App">
-            <RouteApp/>
+            {this.state.loading? <p style={styles.loading}>Loading...</p> : <RouteApp/>}
         </div>
     );
 }

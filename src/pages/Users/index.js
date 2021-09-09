@@ -17,27 +17,22 @@ import { useHistory } from 'react-router-dom';
 
 const Users = (props) => {
 
-    const { topHeaders,button } = useStyles();
-    const [loading, setLoading] = useState(false);
+    const { topHeaders } = useStyles();
     const [users, setUsers] = useState([]);
 
-    function getEndPoint() {
-                setUsers(props.data);
-                setLoading(false);
-            }
     const history = useHistory();
 
     useEffect(() => {
-        setLoading(true);
-        getEndPoint();
-    }, [setUsers]);
+        if (props.data){
+            setUsers(props.data);
+        }
+    }, []);
 
-       function editUser(user){
-           history.push('/EditUser',user)
-       }
+    function editUser(user){
+     history.push('/EditUser',user)
+    }
 
     function getColumns(user,index) {
-
         return (
             <TableBody key={ index } data-testid="tableBody" >
                 <TableCell align="left">{user.name}</TableCell>
@@ -48,38 +43,31 @@ const Users = (props) => {
                 <TableCell align="left">{user.updated_at}</TableCell>
                 <TableCell align="left">
                     <Button onClick={()=>{ editUser(user)}} variant="contained" size="small" color="primary">
-                        Edit
+                      Edit
                     </Button>
                 </TableCell>
-
             </TableBody>
         );
     }
 
     return (
-        <>
-            {loading && <p className="loading">Loading...</p>}
-            {!loading && (
-                <TableContainer component={Paper}>
-                    <Table aria-label="simple table">
-                    <TableHead >
-                        <TableRow>
-                            <TableCell className={topHeaders}>Name</TableCell>
-                            <TableCell className={topHeaders} align="left">Occupation</TableCell>
-                            <TableCell className={topHeaders} align="left">Email</TableCell>
-                            <TableCell className={topHeaders} align="left">Bio</TableCell>
-                            <TableCell className={topHeaders} align="left">Created at</TableCell>
-                            <TableCell className={topHeaders} align="left">Updated at</TableCell>
-                            <TableCell align="left"></TableCell>
-                            <TableCell align="left"></TableCell>
-                        </TableRow>
-                    </TableHead>
-
-                    {users.map((user, index) => getColumns(user, index))}
-                </Table>
-                </TableContainer>
-            )}
-        </>
+        <TableContainer component={Paper}>
+            <Table aria-label="simple table">
+                <TableHead >
+                    <TableRow>
+                        <TableCell className={topHeaders}>Name</TableCell>
+                        <TableCell className={topHeaders} align="left">Occupation</TableCell>
+                        <TableCell className={topHeaders} align="left">Email</TableCell>
+                        <TableCell className={topHeaders} align="left">Bio</TableCell>
+                        <TableCell className={topHeaders} align="left">Created at</TableCell>
+                        <TableCell className={topHeaders} align="left">Updated at</TableCell>
+                        <TableCell align="left"></TableCell>
+                        <TableCell align="left"></TableCell>
+                    </TableRow>
+                </TableHead>
+                {users.map((user, index) => getColumns(user, index))}
+            </Table>
+        </TableContainer>
     );
 };
 

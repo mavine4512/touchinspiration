@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 
 import Home from '../../pages/home'
-import Users from '../../pages/users';
+import Users from '../../pages/Users';
 import EditUser from '../../pages/editUser'
 import useStyles from './styles';
 
@@ -12,7 +12,7 @@ const index = [
         menu: 'Home',
     },
     {
-        path: '/users',
+        path: '/Users',
         menu: 'Users',
     },
 ];
@@ -35,9 +35,9 @@ function RouteApp() {
 
                 <div className={switchContainer}>
                     <Switch>
+                        <Route exact path="/" component={Home} />
+                        <Route path="/Users" component={Users} />
                         <Route path="/EditUser" component={EditUser} />
-                        <Route path="/users" component={Users} />
-                        <Route path="/" component={Home} />
 
                     </Switch>
                 </div>

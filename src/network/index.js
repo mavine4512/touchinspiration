@@ -6,9 +6,9 @@ const fetchUSer = () => {
     return axios.get(baseUrl + '/users')
 }
 
-const updateUser = (id,data) => {
-    return axios.patch( baseUrl+'/users/' + id, data)
-}
+// const updateUser = (id,data) => {
+//     return axios.patch( baseUrl+'/users/' + id, data)
+// }
 
 const network = (url, params, method, body, successCallback, errorCallback) => {
     let param
@@ -18,11 +18,11 @@ const network = (url, params, method, body, successCallback, errorCallback) => {
         param = ''
     }
     let requestParams = '/' + url + '/' + param
-    return axios.request({url: baseUrl + requestParams, method: method, data: body }).then(response => {
+    axios.request({url: baseUrl + requestParams, method: method, data: body }).then(response => {
         successCallback(response)
-    }).then(function (e) {
+    }).catch(function (e) {
         errorCallback(e)
     })
 }
 
-export { fetchUSer,updateUser,network }
+export { fetchUSer,network }

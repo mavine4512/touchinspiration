@@ -2,9 +2,9 @@ export default {
     container:{
         minWidth: '100%',
         height: '100vh',
-      margin: '0vw',
-      padding: '5vw',
-      position:'relative'
+        margin: '0vw',
+        padding: '5vw',
+        position:'relative'
 
     },
     editHeader:{

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import {updateUser,network} from '../../network/'
+import {network} from '../../network/'
 import styles from './styles.js'
 
 class EditUser extends Component{
@@ -20,6 +20,7 @@ class EditUser extends Component{
 
     componentDidMount(){
         let data=this.props.location.state;
+
         this.setState({
             name: data.name,
             occupation: data.occupation,
@@ -28,35 +29,20 @@ class EditUser extends Component{
         })
     }
 
-    // editUserDetails() {
-    //     const id = this.props.location.state.id;
-    //     const data = {
-    //         "bio": this.state.bio,
-    //         "email": this.state.email,
-    //         "name": this.state.name,
-    //         "occupation": this.state.occupation
-    //     };
-    //
-    //     network('users', id, 'patch',data).then(res=>{
-    //         console.log(res)
-    //         this.props.history.push('/');
-    //     }).catch(e)
-    // }
-
-    editUserDetails( ){
-        axios.request({
-            method:'patch',
-            url:`https://ti-react-test.herokuapp.com/users/` + this.props.location.state.id,
-            data:  {
-                "bio":this.state.bio,
-                "email":this.state.email,
-                "name":this.state.name,
-                "occupation":this.state.occupation
-            }
-
-        }).then(response => {
-            this.props.history.push('/');
-        }).catch(err => console.log('Error2',err));
+    editUserDetails() {
+        const id = this.props.location.state.id;
+        const data = {
+            "bio": this.state.bio,
+            "email": this.state.email,
+            "name": this.state.name,
+            "occupation": this.state.occupation
+        };
+        let _this = this
+        network('Users', id, 'patch',data, function (response) {
+            _this.props.history.push('/');
+        }, function (e) {
+            console.log('ErrorResponse', e)
+        })
     }
 
     onSubmit(e){
