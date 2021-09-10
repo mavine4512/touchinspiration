@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import RouteApp from '../route';
 import { connect } from 'react-redux';
-import {bindActionCreators} from 'redux';
+import { bindActionCreators } from 'redux';
 import { upDateItem } from '../../Redux/reducer';
-import {fetchUSer} from '../../network/index';
+import { fetchUSer } from '../../network/index';
+import Loader from "react-loader-spinner";
 import styles from "./styles";
 
 class App extends Component {
@@ -11,6 +12,7 @@ class App extends Component {
         super();
         this.state={
             loading:true,
+            color: "#00BFFF"
         }
     }
 
@@ -41,15 +43,24 @@ class App extends Component {
 
  render(){
     return (
-        <div data-testid="App">
-            {this.state.loading? <p style={styles.loading}>Loading...</p> : <RouteApp/>}
+        <div>
+            {this.state.loading?
+                <div style={styles.loading}>
+                    <Loader
+                        type="Puff"
+                        color="#00BFFF"
+                        height={100}
+                        width={100}
+                        timeout={5000}
+                    />
+                </div> : <RouteApp/>}
         </div>
     );
 }
 
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
     return {
         data: state.dataState.data,
     };

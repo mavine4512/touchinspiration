@@ -1,41 +1,48 @@
 export default {
     container:{
-        minWidth: '100%',
-        height: '100vh',
-        margin: '0vw',
-        padding: '5vw',
-        position:'relative'
-
+       backgroundColor: '#f2f2f2',
     },
     editHeader:{
-        fontSize: '18px',
+        fontSize: '18',
         textAlign: 'center',
-        margin: '0 0 .5vh 0',
+        fontWeight:'bold',
+        color:'rgb(63,81,181)',
+        fontFamily: 'Anton, sans-serif',
+        marginTop:'5px',
+        paddingTop:'10px'
     },
 
     inputField:{
         marginBottom:'2%',
     },
     textInput:{
-        width:'70%',
-        height: '1.5rem',
-        borderWidth:1,
-        borderColor:'gray'
+        width: '95%',
+        padding: '12px 20px',
+        marginLeft: '8px',
+        marginRight: '8px',
+        display: 'inline-block',
+        border: '1px solid #ccc',
+        borderRadius: '4px',
+        boxSizing: 'border-box',
     },
     editLabel:{
         display: 'block',
         fontWeight:'bold',
         fontSize: '14px',
+        padding: '12px 20px',
     },
     btn:{
-        backgroundColor:'blue',
+        width: '25%',
+        backgroundColor:'#4CAF50',
         color: 'white',
-        padding: '5px 15px',
-        borderRadius: '5px',
-        outline: '0',
+        padding: '14px 20px',
+        border: 'none',
        textTransform: 'uppercase',
-       margin: '10px 0px',
+       margin: '10px',
        cursor: 'pointer',
+        '& > hover': {
+            backgroundColor: '#45a049',
+       }
     }
 };
 

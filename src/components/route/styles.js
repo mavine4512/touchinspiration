@@ -1,6 +1,6 @@
 import { createStyles, makeStyles } from '@material-ui/core';
 
-const useStyles = makeStyles(() =>
+const useStyles = makeStyles((theme) =>
     createStyles({
         root: {
             width: '85%',
@@ -12,9 +12,8 @@ const useStyles = makeStyles(() =>
         },
         nav: {
             display: 'block',
-            border: 'thin solid #e3e3e3',
-            paddingTop: 10,
-            paddingBottom: 10,
+            backgroundColor: theme.palette.grey[200],
+            padding: theme.spacing(2),
         },
         menu: {
             width: '100%',
@@ -28,6 +27,7 @@ const useStyles = makeStyles(() =>
                 float: 'left',
                 listStyle: 'none',
             },
+
         },
         link:{
             color:'black',

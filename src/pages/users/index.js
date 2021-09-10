@@ -13,11 +13,12 @@ import Paper from '@material-ui/core/Paper';
 import { bindActionCreators } from "redux";
 import { connect } from 'react-redux';
 import useStyles from './styles';
+import Moment from 'react-moment';
 import { useHistory } from 'react-router-dom';
 
 const Users = (props) => {
 
-    const { topHeaders } = useStyles();
+    const { topHeaders,items } = useStyles();
     const [users, setUsers] = useState([]);
 
     const history = useHistory();
@@ -29,21 +30,25 @@ const Users = (props) => {
     }, []);
 
     function editUser(user){
-     history.push('/EditUser',user)
+        history.push('/EditUser',user)
     }
 
     function getColumns(user,index) {
         return (
             <TableBody key={ index } data-testid="tableBody" >
-                <TableCell align="left">{user.name}</TableCell>
-                <TableCell align="left">{user.occupation}</TableCell>
-                <TableCell align="left">{user.email}</TableCell>
-                <TableCell align="left">{user.bio}</TableCell>
-                <TableCell align="left">{user.created_at}</TableCell>
-                <TableCell align="left">{user.updated_at}</TableCell>
-                <TableCell align="left">
+                <TableCell className={items} align="left">{user.name}</TableCell>
+                <TableCell className={items} align="left">{user.occupation}</TableCell>
+                <TableCell className={items} align="left">{user.email}</TableCell>
+                <TableCell className={items} align="left">{user.bio}</TableCell>
+                <TableCell className={items} align="left"><Moment titleFormat="YYYY-MM-DD" withTitle>
+                    {user.created_at}
+                </Moment></TableCell>
+                <TableCell className={items} align="left"><Moment titleFormat="YYYY-MM-DD" withTitle>
+                    {user.updated_at}
+                </Moment></TableCell>
+                <TableCell className={items} align="left">
                     <Button onClick={()=>{ editUser(user)}} variant="contained" size="small" color="primary">
-                      Edit
+                        Edit
                     </Button>
                 </TableCell>
             </TableBody>

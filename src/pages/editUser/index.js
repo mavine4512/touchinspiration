@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {network} from '../../network/'
 import styles from './styles.js'
+import axios from "axios";
 
 class EditUser extends Component{
     constructor(props){
@@ -28,21 +29,23 @@ class EditUser extends Component{
         })
     }
 
-    editUserDetails() {
-        const id = this.props.location.state.id;
-        const data = {
-            "bio": this.state.bio,
-            "email": this.state.email,
-            "name": this.state.name,
-            "occupation": this.state.occupation
-        };
-        let _this = this
-        network('Users', id, 'patch',data, function (response) {
-            _this.props.history.push('/');
-        }, function (e) {
-            console.log('ErrorResponse', e)
-        })
+    
+    editUserDetails( ){
+        axios.request({
+            method:'patch',
+            url:`https://ti-react-test.herokuapp.com/users/` + this.props.location.state.id,
+            data:  {
+                "bio":this.state.bio,
+                "email":this.state.email,
+                "name":this.state.name,
+                "occupation":this.state.occupation
+            }
+
+        }).then(response => {
+            this.props.history.push('/');
+        }).catch(err => console.log('Error2',err));
     }
+
 
     onSubmit(e){
         const newData = {
@@ -74,7 +77,6 @@ class EditUser extends Component{
     render(){
         return (
             <div style={styles.container} >
-
                 <h3 style={styles.editHeader}>Edit User Details</h3>
                 <form onSubmit={this.onSubmit.bind(this)}>
                     <div style={styles.inputField} >
