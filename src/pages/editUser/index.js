@@ -29,7 +29,7 @@ class EditUser extends Component{
         })
     }
 
-    
+
     editUserDetails( ){
         axios.request({
             method:'patch',

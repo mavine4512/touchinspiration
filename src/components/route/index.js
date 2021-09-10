@@ -4,7 +4,6 @@ import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import Home from '../../pages/home'
 import Users from '../../pages/users';
 import EditUser from '../../pages/editUser';
-import Default from '../../pages/Default';
 import useStyles from './styles';
 
 const index = [
@@ -39,7 +38,6 @@ function RouteApp() {
                         <Route exact path="/" component={Home} />
                         <Route path="/users" component={Users} />
                         <Route path="/EditUser" component={EditUser} />
-                        <Route component={Default} />
                     </Switch>
                 </div>
             </div>
